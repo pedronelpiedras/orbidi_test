@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, timezone
 import requests
+from pprint import pprint
 
 
 import random
@@ -12,7 +13,7 @@ ITERATIONS = 40
 
 def generate_random_datetime():
 
-    if random.uniform(0.0, 1.0) > 0.8:
+    if random.randint(0, 10) > 8:
         return None
     random_seconds = random.randint(0, 60)
     random_minutes = random.randint(0, 60)
@@ -58,8 +59,8 @@ def create_review():
     response = requests.post(
         "http://127.0.0.1:8000/reviews/",
         json={
-            "location_id": random.randint(0, ITERATIONS - 1),
-            "category_id": random.randint(0, ITERATIONS - 1),
+            "location_id": random.randint(1, ITERATIONS),
+            "category_id": random.randint(0, ITERATIONS),
             "review_date": review_date if review_date is None else str(review_date),
         },
     )
@@ -67,8 +68,8 @@ def create_review():
 
 
 for i in range(ITERATIONS):
-    print(create_location(f"location_{i}"))
-    print(create_category(f"category_{i}"))
+    pprint(create_location(f"location_{i}"))
+    pprint(create_category(f"category_{i}"))
 
 for i in range(ITERATIONS):
-    print(create_review())
+    pprint(create_review())

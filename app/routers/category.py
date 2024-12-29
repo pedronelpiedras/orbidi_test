@@ -18,54 +18,54 @@ categories_router = APIRouter(
 @categories_router.post("/")
 @exception_handler
 def create_category(
-    request: Request,
-    category: CategoryRequest,
+    _: Request,
+    category_request: CategoryRequest,
     database: Session = Depends(get_db),
 ) -> CategoryResponse:
     db_repo = DatabaseRepository(database)
-    category = db_repo.create_db_item(category, Category, database)
+    category = db_repo.create_db_item(category_request, Category)
     return CategoryResponse(**category.__dict__)
 
 
 @categories_router.get("/")
 @exception_handler
 def get_locations(
-    request: Request,
+    _: Request,
     database: Session = Depends(get_db),
 ) -> list[CategoryResponse]:
     db_repo = DatabaseRepository(database)
-    categories = db_repo.get_items(Category, database)
+    categories = db_repo.get_items(Category)
     return [CategoryResponse(**item.__dict__) for item in categories]
 
 
 @categories_router.get("/{category_id}")
 @exception_handler
 def get_category(
-    request: Request, category_id: int, database: Session = Depends(get_db)
+    _: Request, category_id: int, database: Session = Depends(get_db)
 ) -> CategoryResponse:
     db_repo = DatabaseRepository(database)
-    category = db_repo.read_db_item(category_id, Category, database)
+    category = db_repo.read_db_item(category_id, Category)
     return CategoryResponse(**category.__dict__)
 
 
 @categories_router.put("/{category_id}")
 @exception_handler
 def update_category(
-    request: Request,
+    _: Request,
     category_id: int,
-    category: CategoryRequest,
+    category_request: CategoryRequest,
     database: Session = Depends(get_db),
 ) -> CategoryResponse:
     db_repo = DatabaseRepository(database)
-    category = db_repo.update_db_item(category_id, category, Category, database)
+    category = db_repo.update_db_item(category_id, category_request, Category)
     return CategoryResponse(**category.__dict__)
 
 
 @categories_router.delete("/{category_id}")
 @exception_handler
 def delete_category(
-    request: Request, category_id: int, database: Session = Depends(get_db)
+    _: Request, category_id: int, database: Session = Depends(get_db)
 ) -> CategoryResponse:
     db_repo = DatabaseRepository(database)
-    category = db_repo.delete_db_item(category_id, Category, database)
+    category = db_repo.delete_db_item(category_id, Category)
     return CategoryResponse(**category.__dict__)

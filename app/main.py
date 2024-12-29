@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI
 from routers.location import locations_router
 from routers.category import categories_router
 from routers.review import reviews_router

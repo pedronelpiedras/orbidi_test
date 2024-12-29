@@ -19,19 +19,19 @@ reviews_router = APIRouter(
 @reviews_router.post("/")
 @exception_handler
 def create_review(
-    request: Request,
-    review: ReviewRequest,
+    _: Request,
+    review_request: ReviewRequest,
     database: Session = Depends(get_db),
 ) -> ReviewResponse:
     db_repo = DatabaseRepository(database)
-    review = db_repo.create_db_item(review, Review, database)
+    review = db_repo.create_db_item(review_request, Review)
     return ReviewResponse(**review.__dict__)
 
 
 @reviews_router.get("/")
 @exception_handler
 def get_reviews(
-    request: Request,
+    _: Request,
     database: Session = Depends(get_db),
 ) -> list[ReviewResponse]:
     db_repo = DatabaseRepository(database)
@@ -43,31 +43,31 @@ def get_reviews(
 @reviews_router.get("/{review_id}")
 @exception_handler
 def get_review(
-    request: Request, review_id: int, database: Session = Depends(get_db)
+    _: Request, review_id: int, database: Session = Depends(get_db)
 ) -> ReviewResponse:
     db_repo = DatabaseRepository(database)
-    review = db_repo.read_db_item(review_id, Review, database)
+    review = db_repo.read_db_item(review_id, Review)
     return ReviewResponse(**review.__dict__)
 
 
 @reviews_router.put("/{review_id}")
 @exception_handler
 def update_review(
-    request: Request,
+    _: Request,
     review_id: int,
-    review: ReviewRequest,
+    review_request: ReviewRequest,
     database: Session = Depends(get_db),
 ) -> ReviewResponse:
     db_repo = DatabaseRepository(database)
-    review = db_repo.update_db_item(review_id, review, Review, database)
+    review = db_repo.update_db_item(review_id, review_request, Review)
     return ReviewResponse(**review.__dict__)
 
 
 @reviews_router.delete("/{review_id}")
 @exception_handler
 def delete_review(
-    request: Request, review_id: int, database: Session = Depends(get_db)
+    _: Request, review_id: int, database: Session = Depends(get_db)
 ) -> ReviewResponse:
     db_repo = DatabaseRepository(database)
-    review = db_repo.delete_db_item(review_id, Review, database)
+    review = db_repo.delete_db_item(review_id, Review)
     return ReviewResponse(**review.__dict__)
