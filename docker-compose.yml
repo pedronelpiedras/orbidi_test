@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - sqlite_db
+
+volumes:
+  sqlite_db:
+    driver: local
