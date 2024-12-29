@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
@@ -11,4 +12,4 @@ class Review(Base):
 
     location_id: Mapped[int] = mapped_column(ForeignKey("locations.id"))
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
-    review_date: Mapped[datetime]
+    review_date: Mapped[Optional[datetime]]

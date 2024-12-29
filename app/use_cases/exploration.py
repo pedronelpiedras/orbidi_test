@@ -22,6 +22,6 @@ class ExplorationUseCase:
                 desc(Review.review_date),
             )
             .limit(10)
-        )
+        ).all()
 
-        return query.all()
+        return query
