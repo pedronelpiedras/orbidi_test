@@ -11,3 +11,4 @@ Steps:
  - run 'pip install requests'
  - run 'python ./scripts/create_entries.py' to create locations, categories and location_categories_reviewed
  - in the same terminal run 'python ./scripts/get_entries.py' to get 10 recomended location-category entries
+ - you can also run 'python ./scripts/get_entries.py' to update all entries or 'python ./scripts/delete_entries.py' to delete them
