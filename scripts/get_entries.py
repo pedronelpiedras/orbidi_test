@@ -8,7 +8,6 @@ from pprint import pprint
 # pprint(get_locations.json())
 
 get_reviews = requests.get("http://127.0.0.1:8000/reviews/").json()
-pprint(len(get_reviews))
 pprint(get_reviews)
 
 # for i in range(40):
