@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from database.core import get_db
 from repositories.database import DatabaseRepository
 from database.review import Review
-from request_objects.review import ReviewRequest
+from request_objects.review import CreateReviewRequest, UpdateReviewRequest
 from response_objects.review import ReviewResponse
 from use_cases.exploration import ExplorationUseCase
 from utils.exception_handler import exception_handler
@@ -20,7 +20,7 @@ reviews_router = APIRouter(
 @exception_handler
 def create_review(
     _: Request,
-    review_request: ReviewRequest,
+    review_request: CreateReviewRequest,
     database: Session = Depends(get_db),
 ) -> ReviewResponse:
     db_repo = DatabaseRepository(database)
@@ -55,7 +55,7 @@ def get_review(
 def update_review(
     _: Request,
     review_id: int,
-    review_request: ReviewRequest,
+    review_request: UpdateReviewRequest,
     database: Session = Depends(get_db),
 ) -> ReviewResponse:
     db_repo = DatabaseRepository(database)
